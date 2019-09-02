@@ -24,6 +24,7 @@
     {"type": "dashboard", "name": "pmm-qan", "path": "dashboards/pmm-qan.json"},
     {"type": "panel", "name": "pmm-qan-app-panel"},
     {"type": "dashboard", "name": "_PMM Inventory", "path": "dashboards/pmm-inventory.json"},
+    {"type": "panel", "name": "pmm-easy-panel-button"},
     {"type": "panel", "name": "pmm-inventory-panel"},
     {"type": "dashboard", "name": "Home Dashboard", "path": "dashboards/Home_Dashboard.json", "addToNav": false, "defaultNav": true},
     {"type": "dashboard", "name": "MySQL_InnoDB_Compression", "path": "dashboards/MySQL_InnoDB_Compression.json"},
