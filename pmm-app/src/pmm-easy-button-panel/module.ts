@@ -66,9 +66,10 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
         jquery.ajax({
             url: "/dbaas/v2/service_instances/" + this.panel.clusterName,
-            contentType: "application/json",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             method: 'UPDATE',
-            data: updateClusterRequest,
+            data: JSON.stringify(updateClusterRequest),
         }).then((data)=>{
             console.log("Cluster was created: ", data);
         })
@@ -91,9 +92,10 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
         jquery.ajax({
             url: "/dbaas/v2/service_instances/" + this.panel.clusterName,
-            contentType: "application/json",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             method: 'PUT',
-            data: createClusterRequest,
+            data: JSON.stringify(createClusterRequest),
         }).then((data)=>{
             console.log("Cluster was created: ", data);
         })
