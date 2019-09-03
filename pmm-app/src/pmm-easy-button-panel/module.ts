@@ -8,7 +8,14 @@ export class PanelCtrl extends MetricsPanelCtrl {
     static template = `
 <table>
     <tr>
-    <td><button style="background-color: black; width: 100px; height: 50px; border: solid 1px black" id="easy_btn">Scale clutster</button></td>
+    <td>
+        <div style="margin-right: 5px;">
+            <input style="background-color: black; width: 50px; height: 50px; border: solid 1px black; padding: 5px; font-size: 16pt" id="easy_input" name="easy_input" value="4">
+        </div>
+    </td>
+    <td>
+        <button style="background-color: black; width: 100px; height: 50px; border: solid 1px black" id="easy_btn">Scale cluster</button>
+    </td>
     <td><div style="margin-left: 20px">{{ctrl.panel.text}}</div></td>
     </tr>
 </table>
@@ -18,15 +25,16 @@ export class PanelCtrl extends MetricsPanelCtrl {
     constructor($scope, $injector) {
         super($scope, $injector);
         this.panel.text = "";
-        this.panel.times = 0;
+        this.panel.instances = 0;
     }
 
     link($scope, elem) {
         const btn = elem.find('#easy_btn');
+        const inpt = elem.find('#easy_input');
+
+        this.panel.instances = inpt[0].value;
         let panel = this.panel;
         let self = this;
-
-        console.log(btn);
 
         btn.on('click', () => {
             console.log("Cluster was scaled!");
@@ -38,9 +46,9 @@ export class PanelCtrl extends MetricsPanelCtrl {
                     }
                 });
 
-            panel.times += 1;
-            panel.text = "Cluster was scaled! " + panel.times;
+            panel.text = "Scaling cluster to " + inpt[0].value + " instances!";
             self.$timeout(() => {}, 100); // Update panel
+            self.$timeout(() => { panel.text = ""}, 2000); // Update panel
         });
     }
 }
