@@ -10,7 +10,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
     <tr>
     <td>
         <div style="margin-right: 5px;">
-            <input style="background-color: black; width: 50px; height: 50px; border: solid 1px black; padding: 5px; font-size: 16pt" id="easy_input" name="easy_input" value="4">
+            <input style="background-color: black; width: 50px; height: 50px; border: solid 1px black; padding: 5px; font-size: 16pt" id="easy_input" name="easy_input" value="{{ctrl.panel.instances}}">
         </div>
     </td>
     <td>
@@ -25,30 +25,77 @@ export class PanelCtrl extends MetricsPanelCtrl {
     constructor($scope, $injector) {
         super($scope, $injector);
         this.panel.text = "";
-        this.panel.instances = 0;
+        this.panel.instances = 3;
+        this.panel.clusterName = "test-pxc-cluster";
     }
 
     link($scope, elem) {
         const btn = elem.find('#easy_btn');
-        const inpt = elem.find('#easy_input');
+        const input = elem.find('#easy_input');
 
-        this.panel.instances = inpt[0].value;
-        let panel = this.panel;
-        let self = this;
-
-        btn.on('click', () => {
-            console.log("Cluster was scaled!");
-            jquery.ajax({
-                url: "/dbaas/v2/catalog",
-            }).done(function( data ) {
-                    if ( console && console.log ) {
-                        console.log( "Sample of data:", data );
-                    }
-                });
-
-            panel.text = "Scaling cluster to " + inpt[0].value + " instances!";
-            self.$timeout(() => {}, 100); // Update panel
-            self.$timeout(() => { panel.text = ""}, 2000); // Update panel
+        input.on('change', (e)=>{
+            console.log(e);
+            this.panel.instances = e.currentTarget.value;
         });
+
+        btn.on('click', this.doScale.bind(this));
+    }
+
+    doScale() {
+
+        jquery.ajax({url: "/dbaas/v2/service_instances/" + this.panel.clusterName})
+            .then(this.updateCluster.bind(this))
+            .catch(this.createCluster.bind(this));
+
+        this.panel.text = "Scaling cluster to " + this.panel.instances + " instances!";
+        this.$timeout(() => {}, 100); // Update panel
+        this.$timeout(() => {  this.panel.text = ""}, 2000); // Update panel
+    }
+
+    updateCluster(data) {
+        console.log("Updating cluster", data );
+
+        let updateClusterRequest = {
+            "service_id":"percona-xtradb-cluster-id",
+            "plan_id":"percona-xtradb-id",
+            "parameters":{
+                "cluster_name": this.panel.clusterName,
+                "replicas": this.panel.instances,
+            }
+        };
+
+        jquery.ajax({
+            url: "/dbaas/v2/service_instances/" + this.panel.clusterName,
+            contentType: "application/json",
+            method: 'UPDATE',
+            data: updateClusterRequest,
+        }).then((data)=>{
+            console.log("Cluster was created: ", data);
+        })
+    }
+
+    createCluster(err) {
+        console.log("Creating cluster", err );
+
+        let createClusterRequest = {
+            "service_id":"percona-xtradb-cluster-id",
+            "plan_id":"percona-xtradb-id",
+            "parameters":{
+                "cluster_name": this.panel.clusterName,
+                "replicas": this.panel.instances,
+                "topology_key": "none",
+                "proxy_sql_replicas": 0,
+                "size": "512M"
+            }
+        };
+
+        jquery.ajax({
+            url: "/dbaas/v2/service_instances/" + this.panel.clusterName,
+            contentType: "application/json",
+            method: 'PUT',
+            data: createClusterRequest,
+        }).then((data)=>{
+            console.log("Cluster was created: ", data);
+        })
     }
 }
