@@ -26,7 +26,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         super($scope, $injector);
         this.panel.text = "";
         this.panel.instances = 3;
-        this.panel.clusterName = "test-pxc-cluster";
+        this.panel.clusterName = "test-pxc";
     }
 
     link($scope, elem) {
@@ -66,12 +66,13 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
         jquery.ajax({
             url: "/dbaas/v2/service_instances/" + this.panel.clusterName,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: "application/json",
             method: 'UPDATE',
             data: JSON.stringify(updateClusterRequest),
         }).then((data)=>{
-            console.log("Cluster was created: ", data);
+            console.log("Cluster was updated: ", data);
+        }).catch((err)=>{
+            console.log("Cluster was not updated: ", err);
         })
     }
 
@@ -92,12 +93,13 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
         jquery.ajax({
             url: "/dbaas/v2/service_instances/" + this.panel.clusterName,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: "application/json",
             method: 'PUT',
             data: JSON.stringify(createClusterRequest),
         }).then((data)=>{
             console.log("Cluster was created: ", data);
+        }).catch((err)=>{
+            console.log("Cluster was not created: ", err);
         })
     }
 }
