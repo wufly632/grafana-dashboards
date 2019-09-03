@@ -5,27 +5,7 @@ import config from 'app/core/config';
 import jquery from "jquery";
 
 export class PanelCtrl extends MetricsPanelCtrl {
-    static template = `
-<table>
-    <tr>
-        <td>
-            <button style="background-color: black; width: 100px; height: 50px; border: solid 1px black" id="easy_btn">Scale cluster</button>
-        </td>
-        <td>
-            <div style="margin-left: 5px;">
-                <input 
-                style="background-color: black; width: 50px; height: 50px; border: solid 1px black; padding: 5px; font-size: 16pt" 
-                id="easy_input" 
-                name="easy_input" 
-                value="{{ctrl.panel.instances}}" >
-            </div>
-        </td>
-        <td>
-            <div style="margin-left: 20px; font-size: 16pt">{{ctrl.panel.text}}</div>
-        </td>
-    </tr>
-</table>
-    `;
+    static templateUrl = 'pmm-easy-button-panel/partials/module.html';
 
     /** @ngInject */
     constructor($scope, $injector) {
@@ -44,24 +24,11 @@ export class PanelCtrl extends MetricsPanelCtrl {
                 e.currentTarget.value = 3;
             }
             this.panel.instances = parseInt(e.currentTarget.value);
+            this.refresh();
         });
 
         btn.on('click', this.doScale.bind(this));
         this.updateClusterStatus();
-    }
-
-    updateClusterStatus() {
-        jquery.ajax({url: "/dbaas/v2/service_instances/" + this.panel.clusterName, dataType: "json"})
-           .then((data)=>{
-               this.panel.text = "Status: " + data.last_operation.state;
-               this.$timeout(() => {}, 100); // Update panel.
-           })
-           .catch((err)=>{
-               console.log(err); this.panel.text = "";
-               this.$timeout(() => {}, 100); // Update panel.
-           });
-
-        this.$timeout(this.updateClusterStatus.bind(this), 10000);
     }
 
     doScale() {
@@ -97,7 +64,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         }).then((data)=>{
             console.log("Cluster was updated: ", data);
             this.panel.text = "Status: " + data.last_operation.state;
-            this.$timeout(() => {}, 100); // Update panel.
+            this.refresh();
         }).catch((err)=>{
             console.log("Cluster was not updated: ", err);
         })
@@ -127,7 +94,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         }).then((data)=>{
             console.log("Cluster was created: ", data);
             this.panel.text = "Status: " + data.last_operation.state;
-            this.$timeout(() => {}, 100); // Update panel.
+            this.refresh();
         }).catch((err)=>{
             console.log("Cluster was not created: ", err);
         })
@@ -141,10 +108,29 @@ export class PanelCtrl extends MetricsPanelCtrl {
             dataType: "json"
         }).then((data)=>{
             console.log("Cluster was deleted: ", data);
-            this.panel.text = "Status: Deleted";
-            this.$timeout(() => {}, 100); // Update panel.
+            this.panel.text = "Status: deleted";
+            this.refresh();
         }).catch((err)=>{
             console.log("Cluster was not deleted: ", err);
         })
+    }
+
+    updateClusterStatus() {
+        jquery.ajax({url: "/dbaas/v2/service_instances/" + this.panel.clusterName, dataType: "json"})
+            .then(this.refreshStatus.bind(this))
+            .catch(this.resetStatus.bind(this));
+        this.$timeout(this.updateClusterStatus.bind(this), 10000);
+    }
+
+    refreshStatus(data) {
+        console.log(data);
+        this.panel.text = "Status: " + data.last_operation.state;
+        this.refresh();
+    }
+
+    resetStatus(err) {
+        console.log(err);
+        this.panel.text = "";
+        this.refresh();
     }
 }
