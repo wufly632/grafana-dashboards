@@ -13,6 +13,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         this.panel.text = "";
         this.panel.instances = 3;
         this.panel.clusterName = "test-pxc";
+        this.panel.operatorImage = "";
         this.panel.pmmImage = "";
         this.panel.pmmHost = "monitoring-service:443";
     }
@@ -43,8 +44,9 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
     changeSettings() {
         this.panel.clusterName = prompt("Cluster Name", this.panel.clusterName) || this.panel.clusterName;
-        this.panel.pmmImage = prompt("PMM Image", this.panel.pmmImage) || this.panel.pmmImage;
         this.panel.pmmHost = prompt("PMM Host", this.panel.pmmHost) || this.panel.pmmHost;
+        this.panel.pmmImage = prompt("PMM Image", this.panel.pmmImage) || this.panel.pmmImage;
+        this.panel.operatorImage = prompt("Operator Image", this.panel.operatorImage) || this.panel.operatorImage;
         this.refresh();
     }
 
@@ -63,6 +65,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
             "parameters":{
                 "cluster_name": this.panel.clusterName,
                 "replicas": instancesCount,
+                "operator_image": this.panel.operatorImage,
                 "pmm_enabled": true,
                 "pmm_image": this.panel.pmmImage,
                 "pmm_host": this.panel.pmmHost,
@@ -98,6 +101,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
                 "topology_key": "none",
                 "proxy_sql_replicas": 0,
                 "size": "512M",
+                "operator_image": this.panel.operatorImage,
                 "pmm_enabled": true,
                 "pmm_image": this.panel.pmmImage,
                 "pmm_host": this.panel.pmmHost,
