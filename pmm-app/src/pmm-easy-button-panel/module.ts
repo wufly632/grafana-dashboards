@@ -13,7 +13,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         this.panel.text = "";
         this.panel.instances = 3;
         this.panel.clusterName = "test-pxc";
-        this.panel.operatorImage = "";
+        this.panel.operatorImage = "perconalab/percona-xtradb-cluster-operator:PR-237-4d1bc75";
         this.panel.pmmImage = "";
         this.panel.pmmHost = "monitoring-service:443";
     }
