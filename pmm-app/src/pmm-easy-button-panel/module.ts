@@ -13,11 +13,14 @@ export class PanelCtrl extends MetricsPanelCtrl {
         this.panel.text = "";
         this.panel.instances = 3;
         this.panel.clusterName = "test-pxc";
+        this.panel.pmmImage = "";
+        this.panel.pmmHost = "monitoring-service:443";
     }
 
     link($scope, elem) {
         const btn = elem.find('#easy_btn');
         const input = elem.find('#easy_input');
+        const settings = elem.find('#easy_settings');
 
         input.on('change', (e)=>{
             if(e.currentTarget.value > 5 || e.currentTarget.value < 0) {
@@ -28,6 +31,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         });
 
         btn.on('click', this.doScale.bind(this));
+        settings.on('dblclick', this.changeSettings.bind(this));
         this.updateClusterStatus();
     }
 
@@ -35,6 +39,13 @@ export class PanelCtrl extends MetricsPanelCtrl {
         jquery.ajax({url: "/dbaas/v2/service_instances/" + this.panel.clusterName, dataType: "json"})
             .then(this.updateCluster.bind(this))
             .catch(this.createCluster.bind(this));
+    }
+
+    changeSettings() {
+        this.panel.clusterName = prompt("Cluster Name", this.panel.clusterName) || this.panel.clusterName;
+        this.panel.pmmImage = prompt("PMM Image", this.panel.pmmImage) || this.panel.pmmImage;
+        this.panel.pmmHost = prompt("PMM Host", this.panel.pmmHost) || this.panel.pmmHost;
+        this.refresh();
     }
 
     updateCluster(data) {
@@ -51,7 +62,12 @@ export class PanelCtrl extends MetricsPanelCtrl {
             "plan_id":"percona-xtradb-id",
             "parameters":{
                 "cluster_name": this.panel.clusterName,
-                "replicas": instancesCount
+                "replicas": instancesCount,
+                "pmm_enabled": true,
+                "pmm_image": this.panel.pmmImage,
+                "pmm_host": this.panel.pmmHost,
+                "pmm_user": "admin",
+                "pmm_pass": "admin",
             }
         };
 
@@ -81,7 +97,12 @@ export class PanelCtrl extends MetricsPanelCtrl {
                 "replicas": parseInt(this.panel.instances),
                 "topology_key": "none",
                 "proxy_sql_replicas": 0,
-                "size": "512M"
+                "size": "512M",
+                "pmm_enabled": true,
+                "pmm_image": this.panel.pmmImage,
+                "pmm_host": this.panel.pmmHost,
+                "pmm_user": "admin",
+                "pmm_pass": "admin",
             }
         };
 
