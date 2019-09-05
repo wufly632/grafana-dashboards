@@ -25,7 +25,10 @@
     {"type": "panel", "name": "pmm-qan-app-panel"},
     {"type": "dashboard", "name": "_PMM Inventory", "path": "dashboards/pmm-inventory.json"},
     {"type": "panel", "name": "pmm-easy-panel-button"},
+    {"type": "dashboard", "name": "PMM Inventory", "path": "dashboards/pmm-inventory.json"},
     {"type": "panel", "name": "pmm-inventory-panel"},
+    {"type": "dashboard", "name": "pmm-add-instance", "path": "dashboards/pmm-add-instance.json"},
+    {"type": "panel", "name": "pmm-add-instance-app-panel"},
     {"type": "dashboard", "name": "Home Dashboard", "path": "dashboards/Home_Dashboard.json", "addToNav": false, "defaultNav": true},
     {"type": "dashboard", "name": "MySQL_InnoDB_Compression", "path": "dashboards/MySQL_InnoDB_Compression.json"},
     {"type": "dashboard", "name": "MySQL_Command_Handler_Counters_Compare", "path": "dashboards/MySQL_Command_Handler_Counters_Compare.json"},
@@ -36,11 +39,8 @@
     {"type": "dashboard", "name": "MongoDB_MMAPv1", "path": "dashboards/MongoDB_MMAPv1.json"},
     {"type": "dashboard", "name": "PXC_Galera_Node_Graphs", "path": "dashboards/PXC_Galera_Node_Graphs.json"},
     {"type": "dashboard", "name": "PXC_Galera_Hosts_Compare", "path": "dashboards/PXC_Galera_Hosts_Compare.json"},
-    {"type": "dashboard", "name": "Disk_Space", "path": "dashboards/Disk_Space.json"},
     {"type": "dashboard", "name": "MySQL_MyRocks_Metrics", "path": "dashboards/MySQL_MyRocks_Metrics.json"},
     {"type": "dashboard", "name": "MySQL_Query_Response_Time", "path": "dashboards/MySQL_Query_Response_Time.json"},
-    {"type": "dashboard", "name": "MySQL_InnoDB_Metrics_Advanced", "path": "dashboards/MySQL_InnoDB_Metrics_Advanced.json"},
-    {"type": "dashboard", "name": "Disk_Performance", "path": "dashboards/Disk_Performance.json"},
     {"type": "dashboard", "name": "MySQL_Overview", "path": "dashboards/MySQL_Overview.json"},
     {"type": "dashboard", "name": "ProxySQL_Overview", "path": "dashboards/ProxySQL_Overview.json"},
     {"type": "dashboard", "name": "Prometheus_Exporters_Overview", "path": "dashboards/Prometheus_Exporters_Overview.json"},
@@ -76,7 +76,8 @@
     {"type": "dashboard", "name": "PostgreSQL_Services_Overview", "path": "dashboards/PostgreSQL_Services_Overview.json"},
     {"type": "dashboard", "name": "MySQL_Services_Compare", "path": "dashboards/MySQL_Services_Compare.json"},
     {"type": "dashboard", "name": "MongoDB_Services_Compare", "path": "dashboards/MongoDB_Services_Compare.json"},
-    {"type": "dashboard", "name": "PostgreSQL_Services_Compare", "path": "dashboards/PostgreSQL_Services_Compare.json"}
+    {"type": "dashboard", "name": "PostgreSQL_Services_Compare", "path": "dashboards/PostgreSQL_Services_Compare.json"},
+    {"type": "dashboard", "name": "Disk_Details", "path": "dashboards/Disk_Details.json"}
   ],
 
   "dependencies": {
