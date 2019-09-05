@@ -1,28 +1,26 @@
-<style>
-    #easy_btn:hover {
-        background-color: #555 !important;
-    }
-</style>
-<table style="width: 100%">
-    <tr>
-        <td style="width: 110px">
-            <button style="background-color: black; width: 100px; height: 50px; border: solid 1px #555; font-size: 12pt;" id="easy_btn">Scale</button>
-        </td>
-        <td>
-            <div style="margin-left: 5px;">
-                <input
-                        style="background-color: black; width: 50px; height: 40px; border: solid 1px black; padding: 5px; font-size: 16pt"
-                        id="easy_input"
-                        name="easy_input"
-                        value="{{ctrl.panel.instances}}"
-                />
-            </div>
-        </td>
-        <td>
-            <div style="font-size: 10pt">{{ctrl.panel.text}}</div>
-        </td>
-        <td style="width: 10px">
-            <div id="easy_settings"><i class="gicon gicon-cog"></i></div>
-        </td>
-    </tr>
-</table>
+<div>
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 65px; padding: 10px">
+                <button class="btn {{ctrl.panel.actionClass}}" id="easy_btn">{{ctrl.panel.action}}</button>
+            </td>
+            <td style="width: 50px">
+                    <input
+                            type="text"
+                            class="gf-form-input max-width-10"
+                            style="width: 50px"
+                            id="easy_input"
+                            name="easy_input"
+                            value="{{ctrl.panel.instances}}"
+                    />
+            </td>
+            <td style="padding: 10px">
+                <div class="pluginlist-item" style="font-size: 10pt">{{ctrl.panel.status}} <span ng-show="ctrl.panel.loading"><i class="fa fa-spinner fa-spin"></i></span></div>
+
+            </td>
+            <td style="width: 10px; padding: 10px">
+                <div style="cursor: pointer" id="easy_settings"><i style="color: #8e8e8e" class="gicon gicon-cog"></i></div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -100,10 +100,8 @@
         {
             "id": 1001,
             "options": {},
-            "text": "test",
             "timeFrom": null,
             "timeShift": null,
-            "title": "Easy button",
             "type": "pmm-easy-button-panel"
         },
         {
