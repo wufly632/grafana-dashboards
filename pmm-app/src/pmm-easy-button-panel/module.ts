@@ -10,11 +10,11 @@ export class PanelCtrl extends MetricsPanelCtrl {
     /** @ngInject */
     constructor($scope, $injector) {
         super($scope, $injector);
-        this.panel.text = "";
+        this.panel.text = "Status: unknown";
         this.panel.instances = 3;
-        this.panel.clusterName = "test-pxc";
-        this.panel.operatorImage = "perconalab/percona-xtradb-cluster-operator:PR-237-4d1bc75";
-        this.panel.pmmImage = "";
+        this.panel.clusterName = "new-cluster";
+        this.panel.operatorImage = "perconalab/percona-xtradb-cluster-operator:PR-237-4a16d07";
+        this.panel.pmmImage = "perconalab/pmm-client-fb:PR-410-22b8620";
         this.panel.pmmHost = "monitoring-service:443";
     }
 
@@ -44,9 +44,9 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
     changeSettings() {
         this.panel.clusterName = prompt("Cluster Name", this.panel.clusterName) || this.panel.clusterName;
-        this.panel.pmmHost = prompt("PMM Host", this.panel.pmmHost) || this.panel.pmmHost;
-        this.panel.pmmImage = prompt("PMM Image", this.panel.pmmImage) || this.panel.pmmImage;
-        this.panel.operatorImage = prompt("Operator Image", this.panel.operatorImage) || this.panel.operatorImage;
+        this.panel.pmmHost = prompt("PMM Server Host", this.panel.pmmHost) || this.panel.pmmHost;
+        this.panel.pmmImage = prompt("PMM Client Docker Image", this.panel.pmmImage) || this.panel.pmmImage;
+        this.panel.operatorImage = prompt("Operator Docker Image", this.panel.operatorImage) || this.panel.operatorImage;
         this.refresh();
     }
 
@@ -155,7 +155,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
     resetStatus(err) {
         console.log(err);
-        this.panel.text = "";
+        this.panel.text = "Status: unknown";
         this.refresh();
     }
 }
