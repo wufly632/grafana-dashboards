@@ -16,7 +16,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         status: "Status: not ready",
         clusterName: "my-cluster",
         operatorImage: "perconalab/percona-xtradb-cluster-operator:PR-237-4a16d07",
-        pmmImage: "perconalab/pmm-client-fb:PR-410-20d4f65",
+        pmmImage: "perconalab/pmm-client-fb:PR-410-4389212",
         pmmHost: "monitoring-service:443",
     };
 
