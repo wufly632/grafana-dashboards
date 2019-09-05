@@ -2,10 +2,11 @@
     <table style="width: 100%;">
         <tr>
             <td style="width: 65px; padding: 10px">
-                <button class="btn {{ctrl.panel.actionClass}}" id="easy_btn">{{ctrl.panel.action}}</button>
+                <button ng-disabled="ctrl.panel.loading" class="btn {{ctrl.panel.actionClass}}" id="easy_btn">{{ctrl.panel.action}}</button>
             </td>
             <td style="width: 50px">
                     <input
+                            ng-disabled="ctrl.panel.loading"
                             type="text"
                             class="gf-form-input max-width-10"
                             style="width: 50px"

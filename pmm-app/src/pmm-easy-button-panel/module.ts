@@ -11,7 +11,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         title: "Cluster: 'my-cluster'",
         instances: 3,
         loading: false,
-        action: "Create",
+        action: "Scale",
         actionClass: "btn-primary",
         status: "Status: not ready",
         clusterName: "my-cluster",
@@ -39,7 +39,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
             this.panel.action = this.panelDefaults.action;
             this.panel.actionClass = this.panelDefaults.actionClass;
-            if(this.panel.instances === 0) {
+            if (this.panel.instances === 0) {
                 this.panel.action = "Remove";
                 this.panel.actionClass = "btn-danger";
             }
@@ -61,6 +61,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
     }
 
     doScale() {
+        this.refreshStatus({last_operation: {state: "in progress"}});
         jquery.ajax({url: "/dbaas/v2/service_instances/" + this.panel.clusterName, dataType: "json"})
             .then(this.updateCluster.bind(this))
             .catch(this.createCluster.bind(this));
@@ -184,7 +185,6 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
     refreshStatus(data) {
         console.log(data);
-        this.panel.action = "Scale";
         this.panel.status = "Status: " + data.last_operation.state;
         this.panel.loading = data.last_operation.state === "in progress";
         this.refresh();
