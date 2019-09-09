@@ -44,7 +44,6 @@ export class PanelCtrl extends MetricsPanelCtrl {
     }
 
     doScale() {
-        this.refreshStatus({last_operation: {state: "in progress"}});
         jquery.ajax({url: "/dbaas/v2/service_instances/" + this.panel.clusterName, dataType: "json"})
             .then(this.updateCluster.bind(this))
             .catch(this.createCluster.bind(this));
@@ -94,7 +93,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         })
             .then((data) => {
                 console.log("Cluster was updated: ", data);
-                this.panel.status = "Status: " + data.last_operation.state;
+                this.panel.status = "Scale";
                 this.refresh();
             })
             .then(this.updateClusterStatus.bind(this))
@@ -134,7 +133,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         })
             .then((data) => {
                 console.log("Cluster was created: ", data);
-                this.panel.status = "Status: " + data.last_operation.state;
+                this.panel.action = "Scale";
                 this.refresh();
             })
             .then(this.updateClusterStatus.bind(this))
@@ -152,7 +151,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         })
             .then((data) => {
                 console.log("Cluster was deleted: ", data);
-                this.panel.status = "Status: deleted";
+                this.panel.action = "Scale";
                 this.refresh();
             })
             .then(this.updateClusterStatus.bind(this))
@@ -169,17 +168,18 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
     refreshStatus(data) {
         console.log(data);
-        this.panel.status = "Status: " + data.last_operation.state;
+        this.panel.action = data.last_operation.state;
         this.panel.loading = data.last_operation.state === "in progress";
         this.refresh();
     }
 
     resetStatus(err) {
+        console.log(err);
         this.panel.loading = false;
-        this.panel.status = "Status: " + err.status + " ( " + err.statusText + " )";
+        this.panel.action = "Scale";
 
         if (err.status === 404) {
-            this.panel.status = "Status: not exists";
+            this.panel.action = "Scale";
         }
 
         this.refresh();
