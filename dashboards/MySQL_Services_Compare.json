@@ -77,6 +77,17 @@
             "includeVars": true,
             "keepTime": true,
             "tags": [
+                "MySQL_HA"
+            ],
+            "targetBlank": false,
+            "title": "HA",
+            "type": "dashboards"
+        },
+        {
+            "asDropdown": true,
+            "includeVars": true,
+            "keepTime": true,
+            "tags": [
                 "Services"
             ],
             "targetBlank": false,
@@ -8277,7 +8288,7 @@
                 "definition": "label_values(mysql_up, node_name)",
                 "hide": 0,
                 "includeAll": true,
-                "label": "Host",
+                "label": "Node Name",
                 "multi": true,
                 "multiFormat": "regex values",
                 "name": "host",
@@ -8346,7 +8357,7 @@
                 "definition": "label_values(mysql_up{node_name=~\"$host\"}, service_name)",
                 "hide": 0,
                 "includeAll": false,
-                "label": "Service",
+                "label": "Service Name",
                 "multi": true,
                 "multiFormat": "regex values",
                 "name": "service",

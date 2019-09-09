@@ -87,7 +87,18 @@
         },
         {
             "asDropdown": true,
-            "includeVars": false,
+            "includeVars": true,
+            "keepTime": true,
+            "tags": [
+                "MySQL_HA"
+            ],
+            "targetBlank": false,
+            "title": "HA",
+            "type": "dashboards"
+        },
+        {
+            "asDropdown": true,
+            "includeVars": true,
             "keepTime": true,
             "tags": [
                 "Services"
@@ -98,7 +109,7 @@
         },
         {
             "asDropdown": true,
-            "includeVars": false,
+            "includeVars": true,
             "keepTime": true,
             "tags": [
                 "PMM"
@@ -1023,7 +1034,7 @@
                 "definition": "label_values(mysql_global_variables_aurora_lab_mode, node_name)",
                 "hide": 0,
                 "includeAll": false,
-                "label": "Host",
+                "label": "Node Name",
                 "multi": false,
                 "multiFormat": "regex values",
                 "name": "host",
@@ -1047,7 +1058,7 @@
                 "definition": "label_values(mysql_global_variables_aurora_lab_mode{node_name=~\"$host\"}, service_name)",
                 "hide": 0,
                 "includeAll": false,
-                "label": "Service",
+                "label": "Service Name",
                 "multi": false,
                 "name": "service",
                 "options": [],

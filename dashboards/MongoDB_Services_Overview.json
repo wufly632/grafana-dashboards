@@ -89,6 +89,17 @@
             "includeVars": true,
             "keepTime": true,
             "tags": [
+                "MongoDB_HA"
+            ],
+            "targetBlank": false,
+            "title": "HA",
+            "type": "dashboards"
+        },
+        {
+            "asDropdown": true,
+            "includeVars": true,
+            "keepTime": true,
+            "tags": [
                 "Services"
             ],
             "targetBlank": false,
@@ -97,7 +108,7 @@
         },
         {
             "asDropdown": true,
-            "includeVars": false,
+            "includeVars": true,
             "keepTime": true,
             "tags": [
                 "PMM"
@@ -8295,7 +8306,7 @@
                 "definition": "",
                 "hide": 0,
                 "includeAll": true,
-                "label": "Host",
+                "label": "Node Name",
                 "multi": false,
                 "multiFormat": "glob",
                 "name": "host",
@@ -8319,7 +8330,7 @@
                 "definition": "",
                 "hide": 0,
                 "includeAll": true,
-                "label": "Service",
+                "label": "Service Name",
                 "multi": true,
                 "multiFormat": "glob",
                 "name": "service",

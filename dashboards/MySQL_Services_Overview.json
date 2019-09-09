@@ -90,6 +90,17 @@
             "includeVars": true,
             "keepTime": true,
             "tags": [
+                "MySQL_HA"
+            ],
+            "targetBlank": false,
+            "title": "HA",
+            "type": "dashboards"
+        },
+        {
+            "asDropdown": true,
+            "includeVars": true,
+            "keepTime": true,
+            "tags": [
                 "Services"
             ],
             "targetBlank": false,
@@ -98,7 +109,7 @@
         },
         {
             "asDropdown": true,
-            "includeVars": false,
+            "includeVars": true,
             "keepTime": true,
             "tags": [
                 "PMM"
@@ -8030,7 +8041,7 @@
                 "definition": "label_values(mysql_up{region=~\"$region\",environment=~\"$environment\",cluster=~\"$cluster\",replication_set=~\"$replication_set\"}, node_name)",
                 "hide": 0,
                 "includeAll": true,
-                "label": "Host",
+                "label": "Node Name",
                 "multi": true,
                 "multiFormat": "regex values",
                 "name": "host",
@@ -8055,7 +8066,7 @@
                 "definition": "label_values(mysql_up{node_name=~\"$host\"}, service_name)",
                 "hide": 0,
                 "includeAll": true,
-                "label": "Service",
+                "label": "Service Name",
                 "multi": true,
                 "multiFormat": "regex values",
                 "name": "service",

@@ -87,7 +87,18 @@
         },
         {
             "asDropdown": true,
-            "includeVars": false,
+            "includeVars": true,
+            "keepTime": true,
+            "tags": [
+                "MySQL_HA"
+            ],
+            "targetBlank": false,
+            "title": "HA",
+            "type": "dashboards"
+        },
+        {
+            "asDropdown": true,
+            "includeVars": true,
             "keepTime": true,
             "tags": [
                 "Services"
@@ -98,7 +109,7 @@
         },
         {
             "asDropdown": true,
-            "includeVars": false,
+            "includeVars": true,
             "keepTime": true,
             "tags": [
                 "PMM"
@@ -4527,7 +4538,7 @@
                 "definition": "label_values(mysql_up, node_name)",
                 "hide": 0,
                 "includeAll": false,
-                "label": "Host",
+                "label": "Node Name",
                 "multi": true,
                 "name": "host",
                 "options": [],
@@ -4549,7 +4560,7 @@
                 "definition": "label_values(mysql_up{node_name=~\"$host\"}, service_name)",
                 "hide": 0,
                 "includeAll": false,
-                "label": "Service",
+                "label": "Service Name",
                 "multi": true,
                 "name": "service",
                 "options": [],
