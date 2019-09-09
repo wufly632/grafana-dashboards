@@ -1,23 +1,8 @@
 <div>
     <table style="width: 100%;">
         <tr>
-            <td style="width: 65px; padding: 10px">
-                <button ng-disabled="ctrl.panel.loading" class="btn {{ctrl.panel.actionClass}}" id="easy_btn">{{ctrl.panel.action}}</button>
-            </td>
-            <td style="width: 50px">
-                    <input
-                            ng-disabled="ctrl.panel.loading"
-                            type="text"
-                            class="gf-form-input max-width-10"
-                            style="width: 50px"
-                            id="easy_input"
-                            name="easy_input"
-                            value="{{ctrl.panel.instances}}"
-                    />
-            </td>
-            <td style="padding: 10px">
-                <div class="pluginlist-item" style="font-size: 10pt">{{ctrl.panel.status}} <span ng-show="ctrl.panel.loading"><i class="fa fa-spinner fa-spin"></i></span></div>
-
+            <td style="width: 300px; padding: 10px">
+                <button style="width: 300px; height: 150px; font-size: 24pt" ng-disabled="ctrl.panel.loading" class="btn {{ctrl.panel.actionClass}}" id="easy_btn">{{ctrl.panel.action}}</button>
             </td>
             <td style="width: 10px; padding: 10px">
                 <div style="cursor: pointer" id="easy_settings"><i style="color: #8e8e8e" class="gicon gicon-cog"></i></div>

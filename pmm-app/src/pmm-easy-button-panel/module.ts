@@ -16,7 +16,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         status: "Status: not ready",
         clusterName: "my-cluster",
         operatorImage: "perconalab/percona-xtradb-cluster-operator:PR-237-d4b0440",
-        pmmImage: "perconalab/pmm-client-fb:PR-410-c61eae3",
+        pmmImage: "perconalab/pmm-client-fb:PR-410-181e302",
         pmmHost: "monitoring-service:443",
     };
 
@@ -28,24 +28,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
     link($scope, elem) {
         const btn = elem.find('#easy_btn');
-        const input = elem.find('#easy_input');
         const settings = elem.find('#easy_settings');
-
-        input.on('change', (e) => {
-            if (e.currentTarget.value > 5 || e.currentTarget.value < 0) {
-                e.currentTarget.value = 3;
-            }
-            this.panel.instances = parseInt(e.currentTarget.value);
-
-            this.panel.action = this.panelDefaults.action;
-            this.panel.actionClass = this.panelDefaults.actionClass;
-            if (this.panel.instances === 0) {
-                this.panel.action = "Remove";
-                this.panel.actionClass = "btn-danger";
-            }
-
-            this.refresh();
-        });
 
         btn.on('click', this.doScale.bind(this));
         settings.on('click', this.changeSettings.bind(this));
@@ -68,8 +51,9 @@ export class PanelCtrl extends MetricsPanelCtrl {
     }
 
     changeSettings() {
+        this.panel.instances = prompt("Instances", this.panel.instances) || this.panel.instances;
         this.panel.clusterName = prompt("Cluster Name", this.panel.clusterName) || this.panel.clusterName;
-        this.panel.title = "Cluster: '" + this.panel.clusterName + "'";
+        this.panel.title = "Scale the cluster";
         this.panel.pmmHost = prompt("PMM Server Host", this.panel.pmmHost) || this.panel.pmmHost;
         this.panel.pmmImage = prompt("PMM Client Docker Image", this.panel.pmmImage) || this.panel.pmmImage;
         this.panel.operatorImage = prompt("Operator Docker Image", this.panel.operatorImage) || this.panel.operatorImage;
