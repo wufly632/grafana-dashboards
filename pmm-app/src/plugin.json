@@ -78,7 +78,7 @@
     {"type": "dashboard", "name": "MongoDB_Services_Compare", "path": "dashboards/MongoDB_Services_Compare.json"},
     {"type": "dashboard", "name": "PostgreSQL_Services_Compare", "path": "dashboards/PostgreSQL_Services_Compare.json"},
     {"type": "dashboard", "name": "Disk_Details", "path": "dashboards/Disk_Details.json"},
-    {"type": "dashboard", "name": "Cluster_Scaling", "path": "dashboards/Cluster-Scaling-1568044344365.json"}
+    {"type": "dashboard", "name": "Cluster_Scaling", "path": "dashboards/Cluster_Scaling_Dashboard.json", "addToNav": true}
   ],
 
   "dependencies": {

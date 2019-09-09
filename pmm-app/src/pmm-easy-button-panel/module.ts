@@ -35,7 +35,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         this.events.on('render', this.onRender.bind(this));
         setInterval(() => {
             this.updateClusterStatus()
-        }, 10000);
+        }, 5000);
     }
 
     onRender() {
@@ -93,7 +93,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         })
             .then((data) => {
                 console.log("Cluster was updated: ", data);
-                this.panel.status = "Scale";
+                this.panel.status = this.panelDefaults.action;
                 this.refresh();
             })
             .then(this.updateClusterStatus.bind(this))
@@ -133,7 +133,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         })
             .then((data) => {
                 console.log("Cluster was created: ", data);
-                this.panel.action = "Scale";
+                this.panel.action = this.panelDefaults.action;
                 this.refresh();
             })
             .then(this.updateClusterStatus.bind(this))
@@ -151,7 +151,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         })
             .then((data) => {
                 console.log("Cluster was deleted: ", data);
-                this.panel.action = "Scale";
+                this.panel.action = this.panelDefaults.action;
                 this.refresh();
             })
             .then(this.updateClusterStatus.bind(this))
@@ -168,7 +168,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
     refreshStatus(data) {
         console.log(data);
-        this.panel.action = data.last_operation.state;
+        this.panel.action = (data.last_operation.state === "succeeded") ? this.panelDefaults.action : data.last_operation.state;
         this.panel.loading = data.last_operation.state === "in progress";
         this.refresh();
     }
@@ -176,12 +176,6 @@ export class PanelCtrl extends MetricsPanelCtrl {
     resetStatus(err) {
         console.log(err);
         this.panel.loading = false;
-        this.panel.action = "Scale";
-
-        if (err.status === 404) {
-            this.panel.action = "Scale";
-        }
-
         this.refresh();
     }
 }
