@@ -32,10 +32,10 @@
       }
     ]
   },
-  "editable": true,
+  "editable": false,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 61,
+  "id": null,
   "iteration": 1568043880903,
   "links": [
     {
@@ -397,7 +397,7 @@
       }
     }
   ],
-  "refresh": "5s",
+  "refresh": "10s",
   "schemaVersion": 19,
   "style": "dark",
   "tags": [
@@ -588,5 +588,5 @@
   "timezone": "browser",
   "title": "Cluster scaling",
   "uid": "PpuYk25Zk",
-  "version": 7
+  "version": 1
 }
