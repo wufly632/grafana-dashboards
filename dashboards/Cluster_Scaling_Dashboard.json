@@ -144,16 +144,16 @@
         "y": 3
       },
       "id": 1001,
-      "instances": "0",
+      "instances": 3,
       "loading": false,
       "operatorImage": "perconalab/percona-xtradb-cluster-operator:PR-237-d4b0440",
       "options": {},
       "pmmHost": "monitoring-service:443",
-      "pmmImage": "perconalab/pmm-client-fb:PR-410-181e302",
-      "status": "Status: not exists",
+      "pmmImage": "perconalab/pmm-client-fb:PR-410-135bd4b",
+      "status": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Cluster: 'my-cluster'",
+      "title": "Scale cluster",
       "type": "pmm-easy-button-panel"
     },
     {

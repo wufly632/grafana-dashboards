@@ -8,15 +8,15 @@ export class PanelCtrl extends MetricsPanelCtrl {
     static templateUrl = 'pmm-easy-button-panel/partials/module.html';
 
     panelDefaults = {
-        title: "Cluster: 'my-cluster'",
+        title: "Scale cluster",
         instances: 3,
         loading: false,
         action: "Scale",
         actionClass: "btn-primary",
-        status: "Status: not ready",
+        status: "Scale",
         clusterName: "my-cluster",
         operatorImage: "perconalab/percona-xtradb-cluster-operator:PR-237-d4b0440",
-        pmmImage: "perconalab/pmm-client-fb:PR-410-181e302",
+        pmmImage: "perconalab/pmm-client-fb:PR-410-135bd4b",
         pmmHost: "monitoring-service:443",
     };
 
@@ -84,6 +84,8 @@ export class PanelCtrl extends MetricsPanelCtrl {
         console.log("Updating cluster...");
         console.log("Request: ", req);
 
+        this.updateButtonStatus();
+
         jquery.ajax({
             url: "/dbaas/v2/service_instances/" + this.panel.clusterName,
             contentType: "application/json",
@@ -93,7 +95,6 @@ export class PanelCtrl extends MetricsPanelCtrl {
         })
             .then((data) => {
                 console.log("Cluster was updated: ", data);
-                this.panel.status = this.panelDefaults.action;
                 this.refresh();
             })
             .then(this.updateClusterStatus.bind(this))
@@ -111,7 +112,6 @@ export class PanelCtrl extends MetricsPanelCtrl {
                 "replicas": parseInt(this.panel.instances),
                 "topology_key": "none",
                 "proxy_sql_replicas": 0,
-                "size": "512M",
                 "operator_image": this.panel.operatorImage,
                 "pmm_enabled": true,
                 "pmm_image": this.panel.pmmImage,
@@ -124,6 +124,8 @@ export class PanelCtrl extends MetricsPanelCtrl {
         console.log("Creating cluster...");
         console.log("Request: ", req);
 
+        this.updateButtonStatus();
+
         jquery.ajax({
             url: "/dbaas/v2/service_instances/" + this.panel.clusterName,
             contentType: "application/json",
@@ -133,7 +135,6 @@ export class PanelCtrl extends MetricsPanelCtrl {
         })
             .then((data) => {
                 console.log("Cluster was created: ", data);
-                this.panel.action = this.panelDefaults.action;
                 this.refresh();
             })
             .then(this.updateClusterStatus.bind(this))
@@ -143,6 +144,9 @@ export class PanelCtrl extends MetricsPanelCtrl {
     }
 
     deleteCluster(data) {
+
+        this.updateButtonStatus();
+
         jquery.ajax({
             url: "/dbaas/v2/service_instances/" + this.panel.clusterName,
             contentType: "application/json",
@@ -151,7 +155,6 @@ export class PanelCtrl extends MetricsPanelCtrl {
         })
             .then((data) => {
                 console.log("Cluster was deleted: ", data);
-                this.panel.action = this.panelDefaults.action;
                 this.refresh();
             })
             .then(this.updateClusterStatus.bind(this))
@@ -166,16 +169,23 @@ export class PanelCtrl extends MetricsPanelCtrl {
             .catch(this.resetStatus.bind(this));
     }
 
+    updateButtonStatus() {
+        this.panel.action = "in progress";
+        this.panel.loading = true;
+        this.refresh();
+
+        this.$timeout(()=>{
+            this.panel.action = "Scale";
+            this.panel.loading = false;
+            this.refresh();
+        }, 120000)
+    }
+
     refreshStatus(data) {
         console.log(data);
-        this.panel.action = (data.last_operation.state === "succeeded") ? this.panelDefaults.action : data.last_operation.state;
-        this.panel.loading = data.last_operation.state === "in progress";
-        this.refresh();
     }
 
     resetStatus(err) {
         console.log(err);
-        this.panel.loading = false;
-        this.refresh();
     }
 }
