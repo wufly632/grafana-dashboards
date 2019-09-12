@@ -149,7 +149,7 @@
       "operatorImage": "perconalab/percona-xtradb-cluster-operator:PR-237-2d1eb9d",
       "options": {},
       "pmmHost": "monitoring-service:443",
-      "pmmImage": "perconalab/pmm-client-fb:PR-410-135bd4b",
+      "pmmImage": "perconalab/pmm-client-fb:PR-410-603b8ac",
       "status": "",
       "timeFrom": null,
       "timeShift": null,
