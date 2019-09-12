@@ -9,7 +9,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
 
     panelDefaults = {
         title: "Scale cluster",
-        instances: 3,
+        instances: 5,
         loading: false,
         action: "Scale",
         actionClass: "btn-primary",

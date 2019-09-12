@@ -144,7 +144,7 @@
         "y": 3
       },
       "id": 1001,
-      "instances": 3,
+      "instances": 5,
       "loading": false,
       "operatorImage": "perconalab/percona-xtradb-cluster-operator:PR-237-2d1eb9d",
       "options": {},
