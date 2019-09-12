@@ -15,7 +15,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
         actionClass: "btn-primary",
         status: "Scale",
         clusterName: "my-cluster",
-        operatorImage: "perconalab/percona-xtradb-cluster-operator:PR-237-d4b0440",
+        operatorImage: "perconalab/percona-xtradb-cluster-operator:PR-237-2d1eb9d",
         pmmImage: "perconalab/pmm-client-fb:PR-410-135bd4b",
         pmmHost: "monitoring-service:443",
     };

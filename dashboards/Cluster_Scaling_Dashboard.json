@@ -146,7 +146,7 @@
       "id": 1001,
       "instances": 3,
       "loading": false,
-      "operatorImage": "perconalab/percona-xtradb-cluster-operator:PR-237-d4b0440",
+      "operatorImage": "perconalab/percona-xtradb-cluster-operator:PR-237-2d1eb9d",
       "options": {},
       "pmmHost": "monitoring-service:443",
       "pmmImage": "perconalab/pmm-client-fb:PR-410-135bd4b",
