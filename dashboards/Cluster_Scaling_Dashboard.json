@@ -149,11 +149,11 @@
       "operatorImage": "perconalab/percona-xtradb-cluster-operator:PR-237-2d1eb9d",
       "options": {},
       "pmmHost": "monitoring-service:443",
-      "pmmImage": "perconalab/pmm-client-fb:PR-410-603b8ac",
+      "pmmImage": "perconalab/pmm-client-fb:PR-410-ebfc2e2",
       "status": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Scale cluster",
+      "title": "Scale the cluster",
       "type": "pmm-easy-button-panel"
     },
     {
@@ -285,8 +285,8 @@
       "grid": {},
       "gridPos": {
         "h": 9,
-        "w": 24,
-        "x": 0,
+        "w": 18,
+        "x": 6,
         "y": 10
       },
       "height": "",
@@ -309,7 +309,7 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "null as zero",
       "options": {
         "dataLinks": []
       },
@@ -332,25 +332,15 @@
         }
       ],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\"}[5m]),1)) ))*100 or (avg_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\", mode!=\"idle\"}[$interval]) or avg_over_time(node_cpu_average{node_name=~\"$host\", mode!=\"total\", mode!=\"idle\"}[5m]))),100)",
-          "format": "time_series",
-          "interval": "$interval",
-          "intervalFactor": 1,
-          "legendFormat": "{{ mode }}",
+          "expr": "(clamp_max(((avg(clamp_max(rate(node_cpu_seconds_total{node_name=~\"my-cluster-pxc-.\", mode=\"user\"}[$interval]),1)))),1) / count(count(node_cpu_seconds_total{node_name=~\"my-cluster-pxc-.\", mode=\"user\"}) by (node_name)))*5",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "user",
           "refId": "B"
-        },
-        {
-          "expr": "clamp_max(max by () (sum  by (cpu) ( (clamp_max(rate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"iowait\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{node_name=~\"$host\",mode!=\"idle\",mode!=\"iowait\"}[5m]),1)) )),1)",
-          "format": "time_series",
-          "hide": true,
-          "interval": "$interval",
-          "intervalFactor": 1,
-          "legendFormat": "Max Core Utilization",
-          "refId": "C"
         }
       ],
       "thresholds": [],
@@ -375,10 +365,10 @@
       "yaxes": [
         {
           "decimals": null,
-          "format": "percent",
-          "label": "",
+          "format": "percentunit",
+          "label": "Cluster Average",
           "logBase": 1,
-          "max": "100",
+          "max": "1",
           "min": 0,
           "show": true
         },
@@ -397,7 +387,7 @@
       }
     }
   ],
-  "refresh": "10s",
+  "refresh": "5s",
   "schemaVersion": 19,
   "style": "dark",
   "tags": [
@@ -412,8 +402,8 @@
         "auto_count": 200,
         "auto_min": "1s",
         "current": {
-          "text": "auto",
-          "value": "$__auto_interval_interval"
+          "text": "5s",
+          "value": "5s"
         },
         "datasource": "Prometheus",
         "hide": 0,
@@ -424,7 +414,7 @@
         "name": "interval",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "auto",
             "value": "$__auto_interval_interval"
           },
@@ -434,7 +424,7 @@
             "value": "1s"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "5s",
             "value": "5s"
           },
@@ -473,7 +463,9 @@
         "allValue": null,
         "current": {
           "text": "All",
-          "value": "$__all"
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "Prometheus",
         "definition": "label_values(mysql_global_status_wsrep_local_state, service_name)",
@@ -498,6 +490,7 @@
         "allFormat": "glob",
         "allValue": null,
         "current": {
+          "selected": true,
           "text": "my-cluster-pxc",
           "value": "my-cluster-pxc"
         },
@@ -525,6 +518,7 @@
       {
         "allValue": null,
         "current": {
+          "selected": false,
           "text": "my-cluster-proxysql-0",
           "value": "my-cluster-proxysql-0"
         },
@@ -588,5 +582,5 @@
   "timezone": "browser",
   "title": "Cluster scaling",
   "uid": "PpuYk25Zk",
-  "version": 1
+  "version": 19
 }
