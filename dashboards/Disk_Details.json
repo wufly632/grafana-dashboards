@@ -48,19 +48,19 @@
             "targetBlank": false,
             "title": "Home",
             "type": "link",
-            "url": "/graph/d/Fxvd1timk/home-dashboard"
+            "url": "/graph/d/pmm-home/home-dashboard"
         },
         {
             "icon": "dashboard",
             "includeVars": true,
             "keepTime": true,
             "tags": [
-                "QAN"
+                "Query Analytics"
             ],
             "targetBlank": false,
             "title": "Query Analytics",
             "type": "link",
-            "url": "/graph/d/7w6Q3PJmz/pmm-query-analytics"
+            "url": "/graph/d/pmm-qan/pmm-query-analytics"
         },
         {
             "icon": "bolt",
@@ -72,7 +72,7 @@
             "targetBlank": false,
             "title": "Compare",
             "type": "link",
-            "url": "/graph/d/000000205/compare-system-parameters"
+            "url": "/graph/d/node-instance-compare/nodes-compare"
         },
         {
             "asDropdown": true,
@@ -87,7 +87,7 @@
         },
         {
             "asDropdown": true,
-            "includeVars": true,
+            "includeVars": false,
             "keepTime": true,
             "tags": [
                 "Services"
@@ -2509,6 +2509,6 @@
     },
     "timezone": "browser",
     "title": "Disk Details",
-    "uid": "oxkrQMNmz",
+    "uid": "node-disk",
     "version": 1
 }

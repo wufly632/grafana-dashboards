@@ -47,23 +47,23 @@
             "targetBlank": false,
             "title": "Home",
             "type": "link",
-            "url": "/graph/d/Fxvd1timk/home-dashboard"
+            "url": "/graph/d/pmm-home/home-dashboard"
         },
         {
             "icon": "dashboard",
             "includeVars": true,
             "keepTime": true,
             "tags": [
-                "QAN"
+                "Query Analytics"
             ],
             "targetBlank": false,
             "title": "Query Analytics",
             "type": "link",
-            "url": "/graph/d/7w6Q3PJmz/pmm-query-analytics"
+            "url": "/graph/d/pmm-qan/pmm-query-analytics"
         },
         {
             "asDropdown": true,
-            "includeVars": true,
+            "includeVars": false,
             "keepTime": true,
             "tags": [
                 "Services"
@@ -150,7 +150,7 @@
     "schemaVersion": 18,
     "style": "dark",
     "tags": [
-        "QAN",
+        "Query Analytics",
         "Percona"
     ],
     "templating": {
@@ -206,7 +206,7 @@
                     }
                 ],
                 "query": "1s,5s,1m,5m,1h,6h,1d",
-                "refresh": 2,
+                "refresh": 0,
                 "skipUrlSync": false,
                 "type": "interval"
             },
@@ -376,6 +376,6 @@
     },
     "timezone": "browser",
     "title": "PMM Query Analytics",
-    "uid": "7w6Q3PJmz",
+    "uid": "pmm-qan",
     "version": 2
 }

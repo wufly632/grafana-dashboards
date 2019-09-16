@@ -48,23 +48,23 @@
             "targetBlank": false,
             "title": "Home",
             "type": "link",
-            "url": "/graph/d/Fxvd1timk/home-dashboard"
+            "url": "/graph/d/pmm-home/home-dashboard"
         },
         {
             "icon": "dashboard",
             "includeVars": true,
             "keepTime": true,
             "tags": [
-                "QAN"
+                "Query Analytics"
             ],
             "targetBlank": false,
             "title": "Query Analytics",
             "type": "link",
-            "url": "/graph/d/7w6Q3PJmz/pmm-query-analytics"
+            "url": "/graph/d/pmm-qan/pmm-query-analytics"
         },
         {
             "asDropdown": true,
-            "includeVars": true,
+            "includeVars": false,
             "keepTime": true,
             "tags": [
                 "Services"
@@ -1014,7 +1014,7 @@
                 {
                     "targetBlank": true,
                     "title": "System Overview",
-                    "url": "/dashboard/db/system-overview?$__url_time_range&$__all_variables"
+                    "url": "/graph/d/node-instance-summary/node-summary?$__url_time_range&$__all_variables"
                 }
             ],
             "mode": "markdown",
@@ -1063,7 +1063,7 @@
                 {
                     "targetBlank": true,
                     "title": "Prometheus Exporter Status",
-                    "url": "/dashboard/db/prometheus-exporter-status?$__url_time_range&$__all_variables"
+                    "url": "/graph/d/o2zrwGNmz/prometheus-exporter-status?$__url_time_range&$__all_variables"
                 }
             ],
             "mappingType": 1,
@@ -1169,7 +1169,7 @@
                 {
                     "targetBlank": true,
                     "title": "Prometheus Exporter Status",
-                    "url": "/dashboard/db/prometheus-exporter-status?$__url_time_range&$__all_variables"
+                    "url": "/graph/d/o2zrwGNmz/prometheus-exporter-status?$__url_time_range&$__all_variables"
                 }
             ],
             "mappingType": 1,
@@ -1272,7 +1272,7 @@
                 {
                     "targetBlank": true,
                     "title": "Prometheus Exporter Status",
-                    "url": "/dashboard/db/prometheus-exporter-status?$__url_time_range&$__all_variables"
+                    "url": "/graph/d/o2zrwGNmz/prometheus-exporter-status?$__url_time_range&$__all_variables"
                 }
             ],
             "mappingType": 1,
@@ -1699,7 +1699,7 @@
     "style": "dark",
     "tags": [
         "Percona",
-        "PMM"
+        "Insight"
     ],
     "templating": {
         "list": [

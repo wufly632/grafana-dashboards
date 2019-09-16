@@ -105,13 +105,13 @@ def add_links(dashboard):
                 if match_ha:
                     print "HA dashboard is detected for the service %s" % match_ha.group(0);
                     service_tag = match_ha.group(0);
-            setOfLinks = ['Home', 'QAN', 'Compare', 'OS', 'MySQL', 'MongoDB', 'PostgreSQL', 'MySQL_HA', 'MongoDB_HA', 'Services', 'PMM']
+            setOfLinks = ['Home', 'Query Analytics', 'Compare', 'OS', 'MySQL', 'MongoDB', 'PostgreSQL', 'MySQL_HA', 'MongoDB_HA', 'Services', 'PMM']
 
             for link in copy.deepcopy(dashboard['links']):
                 dashboard['links'].remove(link)
 
             for tag in setOfLinks:
-                if tag == 'QAN':
+                if tag == 'Query Analytics':
                     add_item = {
                         'icon': 'dashboard',
                         'includeVars': True,
@@ -120,7 +120,7 @@ def add_links(dashboard):
                         'targetBlank': False,
                         'title': 'Query Analytics',
                         'type': 'link',
-                        'url': '/graph/d/7w6Q3PJmz/pmm-query-analytics'
+                        'url': '/graph/d/pmm-qan/pmm-query-analytics'
                     }
                     dashboard['links'].append(add_item)
                 elif tag == 'Home' and (tag not in dashboard['tags']):
@@ -132,7 +132,7 @@ def add_links(dashboard):
                         'targetBlank': False,
                         'title': 'Home',
                         'type': 'link',
-                        'url': '/graph/d/Fxvd1timk/home-dashboard'
+                        'url': '/graph/d/pmm-home/home-dashboard'
                     }
                     dashboard['links'].append(add_item)
                 elif tag == 'Compare' and (tag not in dashboard['tags']):
@@ -145,7 +145,7 @@ def add_links(dashboard):
                             'targetBlank': False,
                             'title': 'Compare',
                             'type': 'link',
-                            'url': '/graph/d/000000205/compare-system-parameters'
+                            'url': '/graph/d/node-instance-compare/nodes-compare'
                         }
                         dashboard['links'].append(add_item)
                     elif 'MySQL' in dashboard['tags']:
@@ -157,7 +157,7 @@ def add_links(dashboard):
                             'targetBlank': False,
                             'title': 'Compare',
                             'type': 'link',
-                            'url': '/graph/d/KQdFKEGWz/mysql-services-compare'
+                            'url': '/graph/d/mysql-instance-compare/mysql-instances-compare'
                         }
                         dashboard['links'].append(add_item)
                     elif 'MongoDB' in dashboard['tags']:
@@ -169,7 +169,7 @@ def add_links(dashboard):
                             'targetBlank': False,
                             'title': 'Compare',
                             'type': 'link',
-                            'url': '/graph/d/OUYqEyOWk/mongodb-services-compare'
+                            'url': '/graph/d/mongodb-instance-compare/mongodb-instances-compare'
                         }
                         dashboard['links'].append(add_item)
                     elif 'PostgreSQL' in dashboard['tags']:
@@ -181,14 +181,14 @@ def add_links(dashboard):
                             'targetBlank': False,
                             'title': 'Compare',
                             'type': 'link',
-                            'url': '/graph/d/6XE3QvKWz/postgresql-services-compare'
+                            'url': '/graph/d/postgresql-instance-compare/postgresql-instances-compare'
                         }
                         dashboard['links'].append(add_item)
                 else:
                     if (tag in dashboard['tags'] or tag in ['Services','PMM',service_tag]) and tag not in ['Compare','Home','MySQL_HA','MongoDB_HA']:
                         add_item = {
                             'asDropdown': True,
-                            'includeVars': True,
+                            'includeVars': True if tag not in ['Services'] else False,
                             'keepTime': True,
                             'tags': [ tag ],
                             'targetBlank': False,
