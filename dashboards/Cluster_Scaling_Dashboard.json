@@ -149,7 +149,7 @@
       "operatorImage": "perconalab/percona-xtradb-cluster-operator:PR-237-2d1eb9d",
       "options": {},
       "pmmHost": "monitoring-service:443",
-      "pmmImage": "perconalab/pmm-client-fb:PR-410-ebfc2e2",
+      "pmmImage": "perconalab/pmm-client-fb:PR-410-8136567",
       "status": "",
       "timeFrom": null,
       "timeShift": null,
@@ -337,14 +337,15 @@
       "targets": [
         {
           "expr": "(clamp_max(((avg(clamp_max(rate(node_cpu_seconds_total{node_name=~\"my-cluster-pxc-.\", mode=\"user\"}[$interval]),1)))),1) / count(count(node_cpu_seconds_total{node_name=~\"my-cluster-pxc-.\", mode=\"user\"}) by (node_name)))*5",
-          "hide": false,
+          "hide": true,
           "instant": false,
-          "legendFormat": "user",
+          "legendFormat": "CPU Usage 2",
           "refId": "B"
         },
         {
-          "expr": "clamp_max(avg(clamp_max(rate(node_cpu_seconds_total{node_name=~\"my-cluster-pxc-.\", mode=\"user\"}[5s]),1)),1) / count(count(node_cpu_seconds_total{node_name=~\"my-cluster-pxc-.\", mode=\"user\"}) by (node_name))",
-          "hide": true,
+          "expr": "sum by (node_name) (avg by (cpu) (rate(node_cpu_seconds_total{node_name=~\"my-cluster-pxc-.\",mode!=\"idle\",mode!=\"iowait\"}[$interval])))",
+          "hide": false,
+          "legendFormat": "CPU Usage",
           "refId": "A"
         }
       ],
@@ -371,9 +372,9 @@
         {
           "decimals": null,
           "format": "percentunit",
-          "label": "Cluster Average",
+          "label": "",
           "logBase": 1,
-          "max": "1",
+          "max": null,
           "min": 0,
           "show": true
         },
@@ -595,7 +596,6 @@
         "allFormat": "glob",
         "allValue": null,
         "current": {
-          "selected": true,
           "text": "my-cluster-pxc",
           "value": "my-cluster-pxc"
         },
@@ -623,7 +623,6 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
           "text": "my-cluster-proxysql-0",
           "value": "my-cluster-proxysql-0"
         },
@@ -687,5 +686,5 @@
   "timezone": "browser",
   "title": "Cluster scaling",
   "uid": "PpuYk25Zk",
-  "version": 23
+  "version": 8
 }
