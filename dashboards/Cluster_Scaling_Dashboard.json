@@ -341,6 +341,11 @@
           "instant": false,
           "legendFormat": "user",
           "refId": "B"
+        },
+        {
+          "expr": "clamp_max(avg(clamp_max(rate(node_cpu_seconds_total{node_name=~\"my-cluster-pxc-.\", mode=\"user\"}[5s]),1)),1) / count(count(node_cpu_seconds_total{node_name=~\"my-cluster-pxc-.\", mode=\"user\"}) by (node_name))",
+          "hide": true,
+          "refId": "A"
         }
       ],
       "thresholds": [],
@@ -379,6 +384,106 @@
           "max": null,
           "min": 0,
           "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": null,
+      "editable": true,
+      "error": false,
+      "fill": 2,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 18,
+        "x": 6,
+        "y": 19
+      },
+      "id": 1005,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "calculatedInterval": "2m",
+          "datasourceErrors": {},
+          "errors": {},
+          "expr": "rate(proxysql_connection_pool_queries{cluster=\"pxc\"}[$interval]) or irate(proxysql_connection_pool_queries{cluster=\"pxc\"}[$interval])",
+          "format": "time_series",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "{{ endpoint }}",
+          "metric": "",
+          "refId": "A",
+          "step": 60
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Queries Routed",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
         }
       ],
       "yaxis": {
@@ -582,5 +687,5 @@
   "timezone": "browser",
   "title": "Cluster scaling",
   "uid": "PpuYk25Zk",
-  "version": 19
+  "version": 23
 }
