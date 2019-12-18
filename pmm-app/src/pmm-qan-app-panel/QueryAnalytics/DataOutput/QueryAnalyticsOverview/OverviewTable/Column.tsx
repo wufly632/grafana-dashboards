@@ -10,12 +10,13 @@ import { METRIC_CATALOGUE } from './metric-catalogue';
 
 export const getColumnName = (metricName, columnIndex, totalValues) => {
   const humanize = new Humanize();
-  let metric = METRIC_CATALOGUE[metricName];
+  const metric = METRIC_CATALOGUE[metricName];
   return {
     sorter: () => {},
     title: () => <AddColumn placeholder={metricName} />,
     render: (text, item) => {
       const stats = item.metrics[metricName].stats;
+      // @ts-ignore
       return (
         <div className={'overview-content-column'}>
           {columnIndex === 0 && <PolygonChart width={150} data={item.sparkline} />}

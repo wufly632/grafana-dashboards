@@ -4,16 +4,16 @@ import * as numeral from 'numeral';
 export class Humanize {
   parceTime(input: number) {
     let dur = '';
-    const dur_sec = moment.duration(input, 's');
+    const durSec = moment.duration(input, 's');
     switch (true) {
       case input === 0:
         dur = '0';
         break;
-      case dur_sec.as('s') > 1 && dur_sec.as('s') < 60:
-        dur = dur_sec.as('s').toFixed(2) + ' sec';
+      case durSec.as('s') > 1 && durSec.as('s') < 60:
+        dur = durSec.as('s').toFixed(2) + ' sec';
         break;
-      case dur_sec.as('s') >= 60:
-        let secs = dur_sec.as('s');
+      case durSec.as('s') >= 60:
+        let secs = durSec.as('s');
         const secondsInDay = 24 * 60 * 60;
         if (secs >= secondsInDay) {
           const days = Math.floor(secs / secondsInDay);
@@ -22,11 +22,11 @@ export class Humanize {
         }
         dur += numeral(secs).format('00:00:00');
         break;
-      case dur_sec.as('ms') < 1:
-        dur = (dur_sec.as('ms') * 1000).toFixed(2) + ' µs';
+      case durSec.as('ms') < 1:
+        dur = (durSec.as('ms') * 1000).toFixed(2) + ' µs';
         break;
       default:
-        dur = dur_sec.as('ms').toFixed(2) + ' ms';
+        dur = durSec.as('ms').toFixed(2) + ' ms';
         break;
     }
     return dur;
