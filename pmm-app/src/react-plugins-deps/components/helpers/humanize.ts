@@ -2,7 +2,7 @@ import * as moment from 'moment';
 import * as numeral from 'numeral';
 
 export class Humanize {
-  parceTime(input: number) {
+  static parceTime(input: number) {
     let dur = '';
     const durSec = moment.duration(input, 's');
     switch (true) {
@@ -32,7 +32,7 @@ export class Humanize {
     return dur;
   }
 
-  transform(input: number, name: string): string {
+  static transform(input: number, name: string): string {
     if (input === null) {
       return '0';
     }
@@ -41,12 +41,12 @@ export class Humanize {
     switch (name) {
       // "top 10"/profile queries no name parameters
       case undefined:
-        res = this.parceTime(input);
+        res = Humanize.parceTime(input);
         break;
       // time
       case 'time':
         res = input !== 0 && input < 0.00001 ? '<' : '';
-        res += this.parceTime(input);
+        res += Humanize.parceTime(input);
         break;
       // size
       case 'size':

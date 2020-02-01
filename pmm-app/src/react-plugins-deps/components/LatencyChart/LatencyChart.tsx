@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import { scaleLog } from 'd3';
+import { Humanize } from '../helpers/humanize';
 
 interface LatencyChartInterface {
   data?: any[];
@@ -12,6 +13,8 @@ class LatencyChart extends Component {
   // private height: number;
   private data: any[];
   // private dataTooltip: string;
+  private measurement: string;
+  private dataTooltip: string;
   constructor(props: LatencyChartInterface) {
     super(props as any);
     // this.measurement = 'time';
@@ -19,10 +22,12 @@ class LatencyChart extends Component {
     this.width = 150;
     // this.height = 30;
     this.data = props.data || [];
+    this.state = {};
   }
 
   componentDidMount() {
     this.drawChart(this.data);
+    this.setState({ tooltip: this.dataTooltip });
   }
   drawChart(data) {
     const chart = d3.select(this.refs.graphContainer);
@@ -41,19 +46,12 @@ class LatencyChart extends Component {
 
     const { min = 0, max = 0, avg = 0, p99 = 0 } = data;
 
-    // const minStr = `⌜ Min: ${humanize.transform(min, this.measurement)}`;
-    // const maxStr = `⌟ Max: ${humanize.transform(max, this.measurement)}`;
-    // const avgStr = `◦ Avg: ${humanize.transform(avg, this.measurement)}`;
-    // const p99Str = `${
-    //   p99 ? `• 99%: ${humanize.transform(p99, this.measurement)}` : ""
-    // }`;
+    const minStr = `⌜ Min: ${Humanize.transform(min, this.measurement)}`;
+    const maxStr = `⌟ Max: ${Humanize.transform(max, this.measurement)}`;
+    const avgStr = `◦ Avg: ${Humanize.transform(avg, this.measurement)}`;
+    const p99Str = `${p99 ? `• 99%: ${Humanize.transform(p99, this.measurement)}` : ''}`;
 
-    // const minStr = `⌜ Min: ${min}`;
-    // const maxStr = `⌟ Max: ${max}`;
-    // const avgStr = `◦ Avg: ${avg}`;
-    // const p99Str = `${p99 ? `• 99%: ${p99}` : ''}`;
-
-    // this.dataTooltip = `${minStr}\n${maxStr}\n${avgStr}\n${p99Str}`.trim();
+    this.dataTooltip = `${minStr}\n${maxStr}\n${avgStr}\n${p99Str}`.trim();
 
     const g = svg.append('g');
 
@@ -107,7 +105,7 @@ class LatencyChart extends Component {
     }
   }
   render() {
-    return <div className={'d3-bar-chart-container'} ref={'graphContainer'}></div>;
+    return <div className={'d3-bar-chart-container app-tooltip'} ref={'graphContainer'} data-tooltip={this.state.tooltip}></div>;
   }
 }
 
