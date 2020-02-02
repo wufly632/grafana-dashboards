@@ -1,10 +1,6 @@
 import { Humanize } from './Humanize';
 
 describe('Humanize', () => {
-  it('create an instance', () => {
-    expect(pipe).toBeTruthy();
-  });
-
   it('should return 0 if input is zero', () => {
     const result = Humanize.parceTime(0);
     expect(result).toBe('0');
