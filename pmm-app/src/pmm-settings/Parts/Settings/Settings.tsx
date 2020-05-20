@@ -9,8 +9,8 @@ import {
   InputField,
   SliderField,
   ToggleField,
-} from 'react-plugins-deps/components/FormComponents';
-import Validators from '../../../react-plugins-deps/components/validators/validators';
+} from 'react-plugins-deps/components/Form';
+import Validators from '../../../react-plugins-deps/components/helpers/validators';
 import { SettingsService } from '../../Settings.service';
 import { GUI_DOC_URL } from '../../panel.constants';
 import './Settings.scss';
