@@ -1,13 +1,13 @@
+import React, { ReactElement, useEffect, useState } from 'react';
+import { Form as FormFinal } from 'react-final-form';
+import { css } from 'emotion';
 import { InputField } from '../../../react-plugins-deps/components/Form/Input/Input';
 import { TextAreaField } from '../../../react-plugins-deps/components/Form/TextArea/TextArea';
-import React, { ReactElement, useEffect, useState } from 'react';
 import ButtonElement from '../../../react-plugins-deps/components/Form/Button/Button';
-import { Form as FormFinal } from 'react-final-form';
 import { SettingsService } from '../../Settings.service';
 import { showSuccessNotification } from '../../../react-plugins-deps/components/helpers/notification-manager';
 import { FormElement } from '../../../react-plugins-deps/components/Form/FormElement/FormElement';
 import { PluginTooltip } from '../../../react-plugins-deps/components/helpers/Helpers';
-import { css } from 'emotion';
 import { GUI_DOC_URL } from '../../panel.constants';
 
 interface AlertManagerSettingsInterface {
@@ -23,7 +23,7 @@ const Styling = {
   `,
 };
 
-const AlertManager = props => {
+const AlertManager = (props) => {
   const [loading, setLoading] = useState(false);
   const onSubmit = async (values: AlertManagerSettingsInterface): Promise<void> => {
     const settings: AlertManagerSettingsInterface = {
@@ -63,7 +63,7 @@ const AlertManager = props => {
               <FormElement
                 data-qa="form-field-am-url"
                 label="Alertmanager URL"
-                tooltip={
+                tooltip={(
                   <PluginTooltip
                     links={[
                       {
@@ -73,19 +73,19 @@ const AlertManager = props => {
                     ]}
                     text="The URL of the external Alertmanager to use"
                   />
-                }
-                element={
+                )}
+                element={(
                   <InputField
                     name="alert_manager_url"
                     placeholder="Enter URL"
                     className={Styling.textAreaWidth}
                   />
-                }
+                )}
               />
               <FormElement
                 data-qa="form-field-alerting-rules"
                 label="Prometheus Alerting rules"
-                tooltip={
+                tooltip={(
                   <PluginTooltip
                     links={[
                       {
@@ -95,14 +95,14 @@ const AlertManager = props => {
                     ]}
                     text="Alerting rules in the YAML configuration format"
                   />
-                }
-                element={
+                )}
+                element={(
                   <TextAreaField
                     name="alert_manager_rules"
                     placeholder="Alerting rules"
                     className={Styling.textAreaWidth}
                   />
-                }
+                )}
                 alignLabel="top"
               />
               <ButtonElement loading={loading} text="Apply Alertmanager settings" />

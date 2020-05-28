@@ -1,6 +1,6 @@
-import Diagnostics from './Diagnostics';
 import React from 'react';
 import renderer from 'react-test-renderer';
+import Diagnostics from './Diagnostics';
 
 describe('Diagnostics part test', () => {
   it('Renders correct', () => {

@@ -10,7 +10,7 @@ describe('Settings Part test', () => {
         settings={{
           ssh_key: 'test_ssh_key',
         }}
-      />
+      />,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

@@ -14,7 +14,9 @@ interface TableProps {
   isSttEnabled: boolean;
 }
 
-export const Table: FC<TableProps> = ({ caption, columns, data = [], isSttEnabled }) => {
+export const Table: FC<TableProps> = ({
+  caption, columns, data = [], isSttEnabled,
+}) => {
   const theme = useTheme();
   const styles = getStyles(theme);
   const isEmpty = !data.length;

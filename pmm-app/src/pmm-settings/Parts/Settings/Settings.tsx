@@ -58,14 +58,14 @@ const dataRetentionValues: MetricsResolutionInterface[] = [
   },
 ];
 
-export const getMetricsResolutionValues = metricsResolutions => {
+export const getMetricsResolutionValues = (metricsResolutions) => {
   let metricsIndex = 0;
 
   dataRetentionValues.forEach((resolution, index) => {
     if (
-      resolution.hr === metricsResolutions.hr &&
-      resolution.mr === metricsResolutions.mr &&
-      resolution.lr === metricsResolutions.lr
+      resolution.hr === metricsResolutions.hr
+      && resolution.mr === metricsResolutions.mr
+      && resolution.lr === metricsResolutions.lr
     ) {
       metricsIndex = index;
     }
@@ -108,13 +108,13 @@ interface SettingsInterface {
   enable_stt?: boolean;
 }
 
-const SettingsPart = props => {
+const SettingsPart = (props) => {
   const [loading, setLoading] = useState(false);
   const { settings } = props;
-  const onSubmit = async values => {
+  const onSubmit = async (values) => {
     const updatedSettings: SettingsInterface = {
       // transform count in days to seconds
-      data_retention: values.data_retention_count * SECONDS_IN_DAY + 's',
+      data_retention: `${values.data_retention_count * SECONDS_IN_DAY}s`,
       metrics_resolutions: dataRetentionValues[values.metrics_resolutions_slider],
     };
 
@@ -160,7 +160,7 @@ const SettingsPart = props => {
               <FormElement
                 data-qa="form-field-metrics"
                 label="Metrics resolution"
-                tooltip={
+                tooltip={(
                   <PluginTooltip
                     links={[
                       {
@@ -170,17 +170,17 @@ const SettingsPart = props => {
                     ]}
                     text="This setting defines how frequently the data will be collected"
                   />
-                }
-                element={
+                )}
+                element={(
                   <SliderField
                     marks={marks}
                     name="metrics_resolutions_slider"
-                    tipFormatter={value => {
+                    tipFormatter={(value) => {
                       const values = dataRetentionValues[value];
                       return `high: ${values.hr}, medium: ${values.mr}, low: ${values.lr}`;
                     }}
                   />
-                }
+                )}
               />
               <Collapse
                 bordered={false}
@@ -192,32 +192,32 @@ const SettingsPart = props => {
                   <FormElement
                     data-qa="form-field-data-retention"
                     label="Data retention (days)"
-                    tooltip={
+                    tooltip={(
                       <PluginTooltip
                         links={[
                           {
                             url:
-                              'https://www.percona.com/doc/percona-monitoring-and-management/' +
-                              '2.x/faq.html#how-to-control-data-retention-for-pmm',
+                              'https://www.percona.com/doc/percona-monitoring-and-management/'
+                              + '2.x/faq.html#how-to-control-data-retention-for-pmm',
                             text: 'Read more',
                           },
                         ]}
                         text="This is the value for how long data will be stored"
                       />
-                    }
-                    element={
+                    )}
+                    element={(
                       <InputField
                         name="data_retention_count"
                         validate={Validators.compose(Validators.range(1, 3650), Validators.required)}
                         wrapperStyle={{ width: '100%' }}
                       />
-                    }
+                    )}
                   />
                   <FormElement
                     data-qa="form-field-telemetry"
                     label="Telemetry"
                     type="horizontal"
-                    tooltip={
+                    tooltip={(
                       <PluginTooltip
                         links={[
                           {
@@ -227,7 +227,7 @@ const SettingsPart = props => {
                         ]}
                         text="Option to send usage data back to Percona to let us make our product better"
                       />
-                    }
+                    )}
                     element={
                       <ToggleField name="telemetry_enabled" disabled={form.getState().values.stt_enabled} />
                     }
@@ -236,7 +236,7 @@ const SettingsPart = props => {
                     data-qa="form-field-check-for-updates"
                     label="Check for updates"
                     type="horizontal"
-                    tooltip={
+                    tooltip={(
                       <PluginTooltip
                         links={[
                           {
@@ -246,13 +246,13 @@ const SettingsPart = props => {
                         ]}
                         text="Option to check new versions and ability to update PMM from UI"
                       />
-                    }
+                    )}
                     element={<ToggleField name="updates_disabled" disabled />}
                   />
                   <FormElement
                     label="Security Threat Tool"
                     type="horizontal"
-                    tooltip={
+                    tooltip={(
                       <PluginTooltip
                         links={[
                           {
@@ -262,7 +262,7 @@ const SettingsPart = props => {
                         ]}
                         text="Enable Security Threat Tool and get updated checks from Percona"
                       />
-                    }
+                    )}
                     element={
                       <ToggleField name="stt_enabled" disabled={!form.getState().values.telemetry_enabled} />
                     }

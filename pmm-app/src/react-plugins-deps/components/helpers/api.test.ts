@@ -1,5 +1,6 @@
-import { apiRequestQAN } from './api';
 import axios from 'axios';
+import { apiRequestQAN } from './api';
+
 jest.mock('axios');
 jest.mock('./notification-manager', () => () => ({}));
 
