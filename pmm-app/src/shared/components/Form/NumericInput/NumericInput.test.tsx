@@ -28,7 +28,7 @@ describe('NumericInput::', () => {
   it('should hide arrow buttons when disabled', () => {
     const wrapper = shallow(<NumericInput className="testClass" />);
 
-    expect(wrapper.find(Input).at(0).hasClass('testClass')).toBe(true);
+    expect(wrapper.at(0).hasClass('testClass')).toBe(true);
 
     wrapper.unmount();
   });
@@ -69,10 +69,11 @@ describe('NumericInput::', () => {
     wrapper.find('button').at(0).simulate('click');
 
     expect(mockedStepUp).toBeCalledTimes(1);
-    expect(mockedStepUp).toBeCalledTimes(1);
+    expect(mockedStepDown).toBeCalledTimes(0);
 
     wrapper.find('button').at(1).simulate('click');
 
+    expect(mockedStepUp).toBeCalledTimes(1);
     expect(mockedStepDown).toBeCalledTimes(1);
 
     wrapper.unmount();

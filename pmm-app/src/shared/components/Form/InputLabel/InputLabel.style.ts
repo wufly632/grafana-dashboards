@@ -1,11 +1,27 @@
 import { css } from 'emotion';
 import { GrafanaTheme } from '@grafana/data';
-import { stylesFactory } from '@grafana/ui';
+import { stylesFactory, selectThemeVariant } from '@grafana/ui';
 
-export const getStyles = stylesFactory((theme: GrafanaTheme) => ({
-  inputLabel: css`
+export const getStyles = stylesFactory((theme: GrafanaTheme) => {
+  const { colors }: any = theme;
+  const backgroundColor = selectThemeVariant(
+    { light: colors.gray98, dark: colors.dark3 },
+    theme.type,
+  );
+  const border = selectThemeVariant(
+    {
+      light: `${theme.border.width.sm} solid ${colors.pageHeaderBorder}`,
+      dark: 'none'
+    },
+    theme.type,
+  );
+
+  return {
+    inputLabel: css`
       align-items: center;
-      background-color: ${theme.colors.bg3};
+      background-color: ${backgroundColor};
+      border: ${border};
+      border-right: 0;
       border-radius: 3px 0 0 3px;
       color: ${theme.colors.text};
       display: flex;
@@ -15,4 +31,5 @@ export const getStyles = stylesFactory((theme: GrafanaTheme) => ({
       min-width: 80px;
       padding: 0 8px 0 12px;
     `,
-}));
+  };
+});
